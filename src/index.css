@@ -1,0 +1,194 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 39% 13%;  /* Deep navy blue #191624 - exact CoachAI match */
+    --foreground: 0 0% 100%;    /* Pure white text #FFFFFF */
+    --card: 240 39% 16%;        /* Slightly lighter navy for cards */
+    --card-foreground: 0 0% 100%;
+    --popover: 240 39% 16%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 240 39% 13%;     /* Navy blue primary - same as background */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 39% 20%;   /* Subtle navy variation */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 240 39% 20%;       /* Subtle navy for muted elements */
+    --muted-foreground: 0 0% 70%; /* Light grey for secondary text */
+    --accent: 0 70% 68%;        /* Muted coral #E57373 - exact CoachAI accent */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 39% 25%;      /* Slightly lighter navy for borders */
+    --input: 240 39% 18%;       /* Dark navy for inputs */
+    --ring: 0 70% 68%;          /* Coral ring color */
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  /* Custom scrollbar for dark theme */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-muted rounded-full;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground rounded-full hover:bg-accent;
+  }
+
+  /* Enhanced focus styles with accent color */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background;
+  }
+
+  /* Smooth transitions */
+  .transition-all-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Enhanced button styles with CoachAI theme */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-accent text-accent-foreground font-semibold rounded-xl hover:bg-accent/90 focus-ring transition-all-smooth disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-card text-foreground font-semibold border border-border rounded-xl hover:bg-muted hover:border-muted-foreground focus-ring transition-all-smooth disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /* Card hover effects for dark theme */
+  .card-hover {
+    @apply transition-all-smooth hover:shadow-lg hover:shadow-black/20 hover:-translate-y-1;
+  }
+
+  /* Enhanced text styles */
+  .text-gradient {
+    @apply bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent;
+  }
+
+  /* Loading animation */
+  .loading-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: .5;
+    }
+  }
+
+  /* Backdrop blur effect for dark theme */
+  .glass-effect {
+    @apply bg-card/80 backdrop-blur-sm border border-border/20;
+  }
+
+  /* Enhanced grid layouts */
+  .grid-auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+
+  .grid-auto-fill {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+/* Custom animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown 0.6s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s ease-out;
+}
+
+/* Typography enhancements */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.011em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-feature-settings: "ss01" 1, "ss02" 1;
+  letter-spacing: -0.025em;
+}
+
+/* Enhanced link styles */
+a {
+  @apply decoration-2 underline-offset-2;
+}
+
+/* Selection styles with accent color */
+::selection {
+  @apply bg-accent text-accent-foreground;
+}
+
+::-moz-selection {
+  @apply bg-accent text-accent-foreground;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
+}
